@@ -1,0 +1,201 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  HOST
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum PaymentMethod {
+  CREDITCARD
+  PROMPTPAY
+}
+
+enum TypeOfAccom {
+  ENTIREHOME
+  PRIVATEROOM
+  SHAREDROOM
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  userID      Int      @id @default(autoincrement())
+  clerkID     String   @unique @db.VarChar(255)
+  role        Role     @default(CUSTOMER)
+  fullName    String   @db.VarChar(255)
+  email       String?  @db.VarChar(255)
+  phoneNumber String?  @db.VarChar(255)
+  address     String?  @db.VarChar(255)
+  imageUrl    String?  @db.VarChar(255)
+  createAt    DateTime @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime @updatedAt @db.Timestamp(0)
+  status      Status   @default(ACTIVE)
+
+  Bookings        Booking[]
+  Accommodations  Accommodation[]
+  WishLists       WishList[]
+  Reviews         Review[]
+  SenderMessage   Message[]       @relation("SenderMessage") //Self relationship
+  ReceiverMessage Message[]       @relation("ReceiverMessage") // Self relationship
+}
+
+model Accommodation {
+  accommodationID Int         @id @default(autoincrement())
+  typeOfAccom     TypeOfAccom @default(PRIVATEROOM)
+  pricePerNight   Decimal     @db.Decimal(10, 2)
+  availQTY        Int
+  title           String      @db.VarChar(255)
+  description     String      @db.Text
+  addressDetail   String      @db.VarChar(500)
+  city            String      @db.VarChar(255)
+  country         String      @db.VarChar(255)
+  MaxGuests       Int
+  NumBedrooms     Int
+  NumBathrooms    Int
+  latitude        Decimal     @db.Decimal(9, 6)
+  longitude       Decimal     @db.Decimal(9, 6)
+  createAt        DateTime    @default(now()) @db.Timestamp(0)
+  updatedAt       DateTime    @updatedAt @db.Timestamp(0)
+
+  hostID      String
+  host        User      @relation(fields: [hostID], references: [clerkID], onDelete: Cascade)
+  accomCateID Int
+  accomCate   AccomCate @relation(fields: [accomCateID], references: [accomcateID], onDelete: Cascade)
+
+  WishLists WishList[]
+  Bookings  Booking[]
+  Reviews   Review[]
+  Rooms     Room[]
+  AccomAmen AccomAmen[]
+}
+
+model Booking {
+  bookingID    Int      @id @default(autoincrement())
+  checkInDate  DateTime
+  checkOutDate DateTime
+  guestQTY     Int
+  totalPrice   Decimal  @db.Decimal(10, 2)
+
+  bookingStatus BookingStatus @default(PENDING)
+  createAt      DateTime      @default(now()) @db.Timestamp(0)
+
+  customerID     String
+  customer       User          @relation(fields: [customerID], references: [clerkID], onDelete: Cascade)
+  accomodationID Int
+  accommodation  Accommodation @relation(fields: [accomodationID], references: [accommodationID], onDelete: Cascade)
+
+  Payments Payment[]
+}
+
+model Payment {
+  paymentID       Int           @id @default(autoincrement())
+  paymentIntentId String        @unique @db.VarChar(255)
+  paymentMethod   PaymentMethod @default(CREDITCARD)
+  paymentStatus   PaymentStatus @default(PENDING)
+  createAt        DateTime      @default(now()) @db.Timestamp(0)
+
+  bookingID Int
+  booking   Booking @relation(fields: [bookingID], references: [bookingID], onDelete: Cascade)
+}
+
+model WishList {
+  wishlistID Int      @id @default(autoincrement())
+  createAt   DateTime @default(now()) @db.Timestamp(0)
+
+  customerID      String
+  customer        User          @relation(fields: [customerID], references: [clerkID], onDelete: Cascade)
+  accommodationID Int
+  accommodation   Accommodation @relation(fields: [accommodationID], references: [accommodationID], onDelete: Cascade)
+}
+
+//Message-User: Self relationship
+model Message {
+  messageID Int      @id @default(autoincrement())
+  message   String   @db.Text
+  sentAt    DateTime @default(now()) @db.Timestamp(0)
+
+  senderID   String
+  sender     User   @relation("SenderMessage", fields: [senderID], references: [clerkID], onDelete: Cascade)
+  receiverID String
+  receiver   User   @relation("ReceiverMessage", fields: [receiverID], references: [clerkID], onDelete: Cascade)
+}
+
+model Review {
+  reviewID Int      @id @default(autoincrement())
+  content  String   @db.Text
+  rating   Decimal  @db.Decimal(2, 1)
+  createAt DateTime @default(now()) @db.Timestamp(0)
+
+  customerID      String
+  customer        User          @relation(fields: [customerID], references: [clerkID], onDelete: Cascade)
+  accommodationID Int
+  accommodation   Accommodation @relation(fields: [accommodationID], references: [accommodationID], onDelete: Cascade)
+}
+
+model Room {
+  roomID Int    @id @default(autoincrement())
+  name   String @db.VarChar(255)
+
+  accommmodationID Int
+  accommodation    Accommodation @relation(fields: [accommmodationID], references: [accommodationID], onDelete: Cascade)
+  ImgsRoom         ImgsRoom[]
+}
+
+model ImgsRoom {
+  imgsRoomID Int    @id @default(autoincrement())
+  imageUrl   String
+
+  roomID Int
+  rooms  Room @relation(fields: [roomID], references: [roomID], onDelete: Cascade)
+}
+
+model Amenity {
+  amenityID Int         @id @default(autoincrement())
+  name      String      @db.VarChar(255)
+  AccomAmen AccomAmen[]
+}
+
+model AccomAmen {
+  accommodationID Int
+  accommodation   Accommodation @relation(fields: [accommodationID], references: [accommodationID], onDelete: Cascade)
+  amenityID       Int
+  amenity         Amenity       @relation(fields: [amenityID], references: [amenityID], onDelete: Cascade)
+
+  @@id([accommodationID, amenityID])
+}
+
+model AccomCate {
+  accomcateID Int    @id @default(autoincrement())
+  cateName    String @db.VarChar(255)
+
+  Accommodations Accommodation[]
+}

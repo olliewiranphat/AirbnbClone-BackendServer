@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `wishlist` ADD COLUMN `status` ENUM('ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE';

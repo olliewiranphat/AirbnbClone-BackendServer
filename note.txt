@@ -1,0 +1,19 @@
+Summary Booking and Payment: (CAN get BookingHistory)
+/// Booking Form.jsx:press "Reservation"(check LOGIN??), API Server to Create Booking data in DB 
+---> link to ConfirmBookingPage.jsx: can update and cancel booking
+
+///cancelBooking.js: check paymentIntentId?? (checkouted??) , update BookingStatus "CANCELLED", use paymentIntentId to Stripe.refunds (BokingHistory Checkouted)
+/// when Strip got data, will send req.body (post method) into stripeWebhook.js --> Checking EventStatus, and Updata Booking-Payment Status
+/// stripeWebhook: send res. to Strip Dont sent data again END PROCRESS for Server
+
+///// FRONTED-WEB:
+#ConfirmBookingPage.jsx: have Booking data, when press "Confirm and Pay" --> link to 'user/payment/craete-session', Payment.jsx: SHOW CheckoutForm
+#Payment.jsx : get token, bookingData, API post('/payment/create-session/:bookingID', createPaymentSession) when return Chekout Form, API Function is called = session.id (clientsecret)
+>>> at createPaymentSession.js (Server-Controller) : find Lasted this booking, and create sessionID, return URL success-page, cancel-page
+--->  send sessionID to FRONTEND, and return URL success-page or cancel-page DEPEND ON Event
+/// Payment SUCCESS: return URL success-page : show ThankyouPage, useEffect API post("/payment/webhook", express.raw({ type: 'application/json' }), stripeWebhook)
+--> stripeWebhook: get Event-verify and UPDATE Booking, Payment STATUS
+/// Payment FAILD : return URL cancel-page : show CancelPaymentPage, API update Payment "FAILD", stripeWebhook
+*** การสร้าง payment record ในฐานข้อมูลของคุณ (เช่น payment table ในฐานข้อมูล) 
+ควรทำใน stripeWebhook หลังจากที่ Frontend เปิด Stripe Checkout form และการชำระเงินเสร็จสิ้น.
+
