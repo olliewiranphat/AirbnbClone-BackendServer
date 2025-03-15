@@ -60,10 +60,10 @@ model User {
   updatedAt   DateTime @updatedAt @db.Timestamp(0)
   status      Status   @default(ACTIVE)
 
-  Bookings        Booking[]
-  Accommodations  Accommodation[]
-  WishLists       WishList[]
-  Reviews         Review[]
+  Booking         Booking[]
+  Accommodation   Accommodation[]
+  WishList        WishList[]
+  Review          Review[]
   SenderMessage   Message[]       @relation("SenderMessage") //Self relationship
   ReceiverMessage Message[]       @relation("ReceiverMessage") // Self relationship
 }
@@ -89,12 +89,12 @@ model Accommodation {
   hostID      String
   host        User      @relation(fields: [hostID], references: [clerkID], onDelete: Cascade)
   accomCateID Int
-  accomCate   AccomCate @relation(fields: [accomCateID], references: [accomcateID], onDelete: Cascade)
+  accomCate   AccomCate @relation(fields: [accomCateID], references: [accomCateID], onDelete: Cascade)
 
-  WishLists WishList[]
-  Bookings  Booking[]
-  Reviews   Review[]
-  Rooms     Room[]
+  WishList  WishList[]
+  Booking   Booking[]
+  Review    Review[]
+  Room      Room[]
   AccomAmen AccomAmen[]
 }
 
@@ -113,7 +113,7 @@ model Booking {
   accomodationID Int
   accommodation  Accommodation @relation(fields: [accomodationID], references: [accommodationID], onDelete: Cascade)
 
-  Payments Payment[]
+  Payment Payment[]
 }
 
 model Payment {
@@ -165,9 +165,9 @@ model Room {
   roomID Int    @id @default(autoincrement())
   name   String @db.VarChar(255)
 
-  accommmodationID Int
-  accommodation    Accommodation @relation(fields: [accommmodationID], references: [accommodationID], onDelete: Cascade)
-  ImgsRoom         ImgsRoom[]
+  accommodationID Int
+  accommodation   Accommodation @relation(fields: [accommodationID], references: [accommodationID], onDelete: Cascade)
+  ImgsRoom        ImgsRoom[] // เชื่อมโยงกับหลายภาพใน Room
 }
 
 model ImgsRoom {
@@ -175,7 +175,7 @@ model ImgsRoom {
   imageUrl   String
 
   roomID Int
-  rooms  Room @relation(fields: [roomID], references: [roomID], onDelete: Cascade)
+  room   Room @relation(fields: [roomID], references: [roomID], onDelete: Cascade)
 }
 
 model Amenity {
@@ -194,8 +194,8 @@ model AccomAmen {
 }
 
 model AccomCate {
-  accomcateID Int    @id @default(autoincrement())
+  accomCateID Int    @id @default(autoincrement())
   cateName    String @db.VarChar(255)
 
-  Accommodations Accommodation[]
+  Accommodation Accommodation[]
 }
