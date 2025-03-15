@@ -17,3 +17,31 @@ Summary Booking and Payment: (CAN get BookingHistory)
 *** การสร้าง payment record ในฐานข้อมูลของคุณ (เช่น payment table ในฐานข้อมูล) 
 ควรทำใน stripeWebhook หลังจากที่ Frontend เปิด Stripe Checkout form และการชำระเงินเสร็จสิ้น.
 
+/// ADDAccommodation: 
+req.body:
+{
+  "accomInfrom": {
+    "title": "Beautiful Beach House",
+    "description": "A beautiful beach house with a great view.",
+    "pricePerNight": 200.00,
+    "availQTY": 5,
+    "addressDetail": "123 Beach Road",
+    "city": "Miami",
+    "country": "USA",
+    "maxGuests": 6,
+    "numBedrooms": 3,
+    "numBathrooms": 2,
+    "latitude": 25.7617,
+    "longitude": -80.1918,
+    "accomCateID": 1,
+    "typeOfAccom": "ENTIREHOME"
+  },
+  "roomData": [
+    { "name": "Master Bedroom", "imageRoom": ["https://example.com/master-room.jpg", "https://example.com/master-room2.jpg"] },
+    { "name": "Living Room", "imageRoom": ["https://example.com/living-room.jpg"] }
+  ],
+  "amenity": [
+    { "amenityID": 1, "quantity": 2 },
+    { "amenityID": 2, "quantity": 3 }
+  ]
+}
