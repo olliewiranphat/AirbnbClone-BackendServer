@@ -1,29 +1,34 @@
 const TryCatch = require("../../utils/TryCatch");
-const prisma = require('../../models')
+const prisma = require('../../models');
+const createError = require("../../utils/createError");
 
 exports.getDashboard = TryCatch(async (req, res) => {
     /// allUsers-Reviews:
     const allUserReview = await prisma.user.findMany({
         include: {
-            Reviews: true,
-            Accommodations: true
+            Review: true,
+            Accommodation: true
         }
     })
+    console.log('allUserReview', allUserReview);
+
     /// allUser-Bookings: 
     const allUserBooking = await prisma.user.findMany({
         include: {
-            Bookings: {
+            Booking: {
                 include: {
-                    Payments: true
+                    Payment: true
                 }
-            }
+            },
+            Accommodation: true
         }
     })
+    console.log('allUserBooking', allUserBooking);
 
     const allAccom = await prisma.accommodation.findMany({
         include: {
             accomCate: true,
-            Rooms: {
+            Room: {
                 include: {
                     ImgsRoom: true
                 }
@@ -35,17 +40,16 @@ exports.getDashboard = TryCatch(async (req, res) => {
             }
         }
     })
+    console.log('allAccom', allAccom);
 
-
-
-    res.status(200).json({ message: "SUCCESS, adminDashboard", results: allUserReview, allUserBooking, allAccom })
+    res.status(200).json({ message: "SUCCESS, adminDashboard", results: { allUserReview, allUserBooking, allAccom } })
 })
 
 exports.getAllUsers = TryCatch(async (req, res) => {
     const AllUsers = await prisma.user.findMany()
     console.log('AllUsers', AllUsers);
 
-    res.status(200).json({ message: "SUCCESS, AllUsers" })
+    res.status(200).json({ message: "SUCCESS, AllUsers", results: AllUsers })
 })
 
 exports.getAllHosts = TryCatch(async (req, res) => {
@@ -54,7 +58,7 @@ exports.getAllHosts = TryCatch(async (req, res) => {
     })
     console.log('AllHosts', AllHosts);
 
-    res.status(200).json({ message: "SUCCESS, AllHosts" })
+    res.status(200).json({ message: "SUCCESS, AllHosts", results: AllHosts })
 })
 
 exports.getAllBookings = TryCatch(async (req, res) => {
@@ -65,7 +69,7 @@ exports.getAllBookings = TryCatch(async (req, res) => {
 })
 
 exports.getAllAccomAmen = TryCatch(async (req, res) => {
-    const results = prisma.accommodation.findMany({
+    const results = await prisma.accommodation.findMany({
         include: {
             AccomAmen: {
                 include: {
@@ -74,5 +78,8 @@ exports.getAllAccomAmen = TryCatch(async (req, res) => {
             }
         }
     })
+    console.log('results', results);
+
+
     res.status(200).json({ message: "SUCCESS, getAllAccomAmen!", results })
 })

@@ -10,8 +10,8 @@ const adminRouter = express.Router()
 adminRouter.get('/dashboard', authenticaion, authorAdmin, getDashboard) //allAccommodations also HERE!
 adminRouter.get('/all-users', authenticaion, authorAdmin, getAllUsers)
 adminRouter.get('/all-hosts', authenticaion, authorAdmin, getAllHosts)
-adminRouter.get('/all-bookings', authenticaion, authorAdmin, getAllBookings)
 adminRouter.get('/all-accommodations/amenities', authenticaion, authorAdmin, getAllAccomAmen)
+// adminRouter.get('/all-bookings', authenticaion, authorAdmin, getAllBookings)
 
 /// accomCateController.js 
 adminRouter.post('accomcate/create', authenticaion, authorAdmin, createAccomCate)

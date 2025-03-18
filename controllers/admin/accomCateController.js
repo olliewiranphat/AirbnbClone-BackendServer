@@ -14,7 +14,7 @@ exports.createAccomCate = TryCatch(async (req, res) => {
 exports.getAllAccomCate = TryCatch(async (req, res) => {
     const allAccomCate = await prisma.accomCate.findMany()
     console.log('allAccomCate', allAccomCate);
-    res.status(200).json({ message: "SUCCESS, Get all AccomCate already!" })
+    res.status(200).json({ message: "SUCCESS, Get all AccomCate already!", allAccomCate })
 })
 
 exports.updateCateName = TryCatch(async (req, res) => {

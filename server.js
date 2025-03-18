@@ -15,6 +15,7 @@ const NotFound = require('./middlewares/NotFound')
 // app.use(cors({ origin: 'http://localhost:5173' })) // connect with Frontend
 app.use(cors()) // connect with Frontend
 app.use(express.json({ limit: "10mb" })) //Max Payload Size, Server can read
+app.use(express.urlencoded({ extended: true })); // ✅ รองรับ form-data
 app.use(morgan('dev')) //log API Req. path, method, time
 app.use(clerkMiddleware()) //authentication : req.auth.userId (CLERK)
 
