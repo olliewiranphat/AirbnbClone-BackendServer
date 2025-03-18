@@ -8,13 +8,17 @@ const { createPaymentSession, stripeWebhook } = require('../controllers/user/pay
 const { createUnlistWishlist, getWishlistHistory } = require('../controllers/user/wishlistController')
 const { postReview } = require('../controllers/user/reviewController')
 const { getMessage, sendMessage } = require('../controllers/user/messageController')
+const upload = require('../config/multerImage')
+
 
 ///// ACCOUNT:
 userRouter.put('/my-account/create-update', authenticaion, createUpdateAccount)
 userRouter.get('/my-account/get', authenticaion, getMyAccount)
-userRouter.patch('/my-account/update-imageurl', authenticaion, updateImageUrl)
-userRouter.get('/my-account/inactive', authenticaion, inactiveAccount)
-
+userRouter.patch('/my-account/inactive', authenticaion, inactiveAccount)
+userRouter.patch('/my-account/update-imageurl', authenticaion, upload.single("file"), updateImageUrl)
+//NOTE: upload.single("file") ทำงานเป็น Middleware ก่อนถึง updateImageUrl
+//ค่า "file" ที่ใช้ใน upload.single("file") ต้องตรงกับชื่อของ FormData.append("file", imageFile)
+// Express และ Multer จะใช้ชื่อนี้ในการ ดึงไฟล์ที่ถูกอัปโหลดจาก req.file
 
 // ///// BOOKING :
 userRouter.post('/booking/create/:accommodationID', createBooking) //Create Booking
@@ -37,7 +41,7 @@ userRouter.post('/wishlist/create-unlist', authenticaion, createUnlistWishlist)
 userRouter.get('/wishlist/history', authenticaion, getWishlistHistory)
 
 ////// REVIEW :
-userRouter.post('review/:accommodationID', authenticaion, postReview)
+userRouter.post('/review/:accommodationID', authenticaion, postReview)
 
 ////// Message:
 userRouter.post('/message/send/:receiverID', sendMessage)
