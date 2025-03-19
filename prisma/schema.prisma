@@ -51,7 +51,7 @@ model User {
   userID      Int      @id @default(autoincrement())
   clerkID     String   @unique @db.VarChar(255)
   role        Role     @default(CUSTOMER)
-  fullName    String?  @db.VarChar(255)
+  fullName    String?   @db.VarChar(255)
   email       String?  @db.VarChar(255)
   phoneNumber String?  @db.VarChar(255)
   address     String?  @db.VarChar(255)
