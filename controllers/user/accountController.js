@@ -12,6 +12,7 @@ exports.createUpdateAccount = TryCatch(async (req, res) => {
 
     const { id } = req.user
     // console.log('id', id);
+    console.log(req.user.fullName)
 
     /// Add ROLE (from Frontend) to Clerk database:
     if (req.body.role) { //HOST
@@ -69,6 +70,7 @@ exports.createUpdateAccount = TryCatch(async (req, res) => {
         const createUser = await prisma.user.create({
             data: {
                 clerkID: id,
+                fullName: req.user.fullName,
                 ...req.body
             }
         })

@@ -5,9 +5,10 @@ const { addImageCloud, delImageCloud } = require('../controllers/host/imagesCont
 const { getDashboard } = require('../controllers/host/hostController')
 const { deleteAccom, getAllMyAccom, addAccom, updateRoomImgs, updateAccomAmen } = require('../controllers/host/accomController')
 const hostRouter = express.Router()
-
+// const upload = require('../config/multerImage')
+const upload2 = require('../config/upload')
 ///// Images Product by Cloudinary : 
-hostRouter.post('/accommodation/add-image-cloud', authenticaion, authorHost, addImageCloud) //Cloudinary Storage : Keep Images
+hostRouter.post('/accommodation/add-image-cloud', authenticaion,upload2.single("file"), authorHost, addImageCloud) //Cloudinary Storage : Keep Images
 hostRouter.post('/accommodation/delete-image-cloud', authenticaion, authorHost, delImageCloud) //Cloudinary Storage : delete Old Images
 
 ///// ADD Accom :
