@@ -7,17 +7,19 @@ const sharp = require('sharp')
 
 ///// UserAccount : Create or Update userData (after login with CLERK)
 exports.createUpdateAccount = TryCatch(async (req, res) => {
-    console.log('req.body', req.body); //ITEMvalue
-    // console.log('req.user', req.user); //id (clerkID)
+    console.log('req.body >>>', req.body); //ITEMvalue
+    console.log('req.user.publicMetadata.role', req.user.publicMetadata.role); //id (clerkID)
 
     const { id } = req.user
     // console.log('id', id);
 
     /// Add ROLE (from Frontend) to Clerk database:
-    if (req.body.role) {
-        await clerkClient.users.updateUserMetadata(id, {
-            publicMetadata: { role: req.body.role }
-        })
+    if (req.body.role) { //HOST
+        if (req.user.publicMetadata.role !== req.body.role) {
+            await clerkClient.users.updateUserMetadata(id, {
+                publicMetadata: { role: req.body.role }
+            })
+        }
     }
 
     ///// Update PhoneNumber??:
@@ -85,10 +87,10 @@ exports.createUpdateAccount = TryCatch(async (req, res) => {
 ///// UserAccount : Get My account
 exports.getMyAccount = TryCatch(async (req, res) => {
     // console.log('req.user', req.user);
-    const { role } = req.user.publicMetadata
+    const { role } = req.user.publicMetadata //ADMIN
     console.log("role", role);
     const { id } = req.user
-    console.log('id', id);
+    // console.log('id', id);
 
     ///// Find user by id (clerkID) :
     const findUserDB = await prisma.user.findUnique({ where: { clerkID: id } })
@@ -119,17 +121,17 @@ exports.getMyAccount = TryCatch(async (req, res) => {
 ///// UserAccount : Delete Account
 exports.inactiveAccount = TryCatch(async (req, res) => {
     // console.log('req.user', req.user);
-    // const { id } = req.user
+    const { id } = req.user
 
     // //// Delete user at Clerk database:
     // await clerkClient.users.deleteUser(id)
 
-    ///// Find user in DB first:
-    // const findUserDB = await prisma.user.update({
-    //     where: { clerkID: id },
-    //     data: { status: "INACTIVE" }
-    // })
-    // !findUserDB && createError(404, "No have this user in DB")
+    /// Find user in DB first:
+    const findUserDB = await prisma.user.update({
+        where: { clerkID: id },
+        data: { status: "INACTIVE" }
+    })
+    !findUserDB && createError(404, "No have this user in DB")
 
     res.status(200).json({ status: "SUCCESS", message: "Inactive already!" })
 })

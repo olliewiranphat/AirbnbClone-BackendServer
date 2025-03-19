@@ -1,7 +1,7 @@
 const express = require('express')
 const authenticaion = require('../middlewares/authenticaion')
 const authorAdmin = require('../middlewares/authorAdmin')
-const { getDashboard, getAllUsers, getAllHosts, getAllBookings, getAllAccomAmen } = require('../controllers/admin/adminController')
+const { getDashboard, getAllUsers, getAllHosts, getAllBookings, getAllAccomAmen, getAllAccommodations } = require('../controllers/admin/adminController')
 const { createAccomCate, getAllAccomCate, updateCateName, deleteAccomCate } = require('../controllers/admin/accomCateController')
 const { createNewAmenity, getAllAmenities, updateAmenity, deleteAmenity } = require('../controllers/admin/amenityController')
 const adminRouter = express.Router()
@@ -10,8 +10,8 @@ const adminRouter = express.Router()
 adminRouter.get('/dashboard', authenticaion, authorAdmin, getDashboard) //allAccommodations also HERE!
 adminRouter.get('/all-users', authenticaion, authorAdmin, getAllUsers)
 adminRouter.get('/all-hosts', authenticaion, authorAdmin, getAllHosts)
-adminRouter.get('/all-accommodations/amenities', authenticaion, authorAdmin, getAllAccomAmen)
-// adminRouter.get('/all-bookings', authenticaion, authorAdmin, getAllBookings)
+adminRouter.get('/all-bookings', authenticaion, authorAdmin, getAllBookings)
+adminRouter.get('/all-accommodations', getAllAccommodations)
 
 /// accomCateController.js 
 adminRouter.post('accomcate/create', authenticaion, authorAdmin, createAccomCate)
