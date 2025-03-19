@@ -12,7 +12,7 @@ const upload = require('../config/multerImage')
 
 
 ///// ACCOUNT:
-userRouter.put('/my-account/create-update', authenticaion, createUpdateAccount)
+userRouter.patch('/my-account/create-update', authenticaion, createUpdateAccount)
 userRouter.get('/my-account/get', authenticaion, getMyAccount)
 userRouter.patch('/my-account/inactive', authenticaion, inactiveAccount)
 userRouter.patch('/my-account/update-imageurl', authenticaion, upload.single("file"), updateImageUrl)
