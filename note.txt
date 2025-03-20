@@ -122,3 +122,35 @@ JSON ไม่รองรับ binary data (ไฟล์เป็น buffer �
 ❌ req.body ไม่สามารถรับ file ได้เพราะ JSON ไม่รองรับ binary data
 ✅ ต้องใช้ FormData เพื่อส่งไฟล์แบบ multipart/form-data
 ✅ Backend ต้องใช้ multer เพื่ออ่าน req.file (ไฟล์ภาพ)
+
+
+
+
+
+
+
+
+DATABASE_URL="mysql://root:1234@localhost:3306/mb_airbnb"
+
+
+CLOUDINARY_NAME = dul5famaq
+CLOUDINARY_API_KEY = 587946986389696
+CLOUDINARY_API_SECRET =n-IVbUTuzxYw9ci9unW7-UIF8qY
+
+
+STRIPE_SECRET_KEY=sk_test_51R3UKg4FpLrx0t3akVE0lNBl2IfEMOgEAJj4LFNt5z68JyMvZfHchkt6ArnsY526gyMVWURLO79q7ijrmrovTFjm00KhMn1Ai8
+
+# CLERK_PUBLISHABLE_KEY=pk_test_c3Rhci1wcmltYXRlLTY5LmNsZXJrLmFjY291bnRzLmRldiQ
+# CLERK_SECRET_KEY=sk_test_qFrwFd4d7OtxfcTemU2qnmgKHmacdWvIildxHdmZcu
+
+# CLERK_PUBLISHABLE_KEY=pk_test_bm9ibGUtcXVhZ2dhLTg4LmNsZXJrLmFjY291bnRzLmRldiQ
+# CLERK_SECRET_KEY=sk_test_iLUkYqljdGO9bnNu8uaWpFvhVN57FaCSyQkBDiu1zA
+
+
+CLERK_PUBLISHABLE_KEY=pk_test_c3Rhci1wcmltYXRlLTY5LmNsZXJrLmFjY291bnRzLmRldiQ
+CLERK_SECRET_KEY=sk_test_qFrwFd4d7OtxfcTemU2qnmgKHmacdWvIildxHdmZcu
+
+
+ล้างฐานข้อมูล npm run resetDB
+db push ก่อน seed = npx prisma db push
+seed ข้อมูล npx prisma db seed
