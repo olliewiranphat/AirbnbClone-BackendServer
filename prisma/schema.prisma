@@ -60,12 +60,15 @@ model User {
   updatedAt   DateTime @updatedAt @db.Timestamp(0)
   status      Status   @default(ACTIVE)
 
-  Booking         Booking[]
-  Accommodation   Accommodation[]
-  WishList        WishList[]
-  Review          Review[]
-  SenderMessage   Message[]       @relation("SenderMessage") //Self relationship
-  ReceiverMessage Message[]       @relation("ReceiverMessage") // Self relationship
+  Booking       Booking[]
+  Accommodation Accommodation[]
+  WishList      WishList[]
+  Review        Review[]
+
+  Conversation1   Conversation[] @relation("ConversationParticipant1")
+  Conversation2   Conversation[] @relation("ConversationParticipant2")
+  SenderMessage   Message[]      @relation("SenderMessage")
+  ReceiverMessage Message[]      @relation("ReceiverMessage")
 }
 
 model Accommodation {
@@ -137,16 +140,34 @@ model WishList {
   accommodation   Accommodation @relation(fields: [accommodationID], references: [accommodationID], onDelete: Cascade)
 }
 
+model Conversation {
+  conversationID Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now()) @db.Timestamp(0)
+
+  participant1ID String
+  participant1   User   @relation("ConversationParticipant1", fields: [participant1ID], references: [clerkID], onDelete: Cascade)
+
+  participant2ID String
+  participant2   User   @relation("ConversationParticipant2", fields: [participant2ID], references: [clerkID], onDelete: Cascade)
+
+  Message Message[]
+}
+
 //Message-User: Self relationship
 model Message {
   messageID Int      @id @default(autoincrement())
   message   String   @db.Text
   sentAt    DateTime @default(now()) @db.Timestamp(0)
+  isRead    Boolean  @default(false) //Read STATUS
 
-  senderID   String
-  sender     User   @relation("SenderMessage", fields: [senderID], references: [clerkID], onDelete: Cascade)
+  senderID String
+  sender   User   @relation("SenderMessage", fields: [senderID], references: [clerkID], onDelete: Cascade)
+
   receiverID String
   receiver   User   @relation("ReceiverMessage", fields: [receiverID], references: [clerkID], onDelete: Cascade)
+
+  conversationID Int
+  conversation   Conversation @relation(fields: [conversationID], references: [conversationID], onDelete: Cascade)
 }
 
 model Review {
