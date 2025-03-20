@@ -88,7 +88,7 @@ exports.createUpdateAccount = TryCatch(async (req, res) => {
 exports.getMyAccount = TryCatch(async (req, res) => {
     // console.log('req.user', req.user);
     const { role } = req.user.publicMetadata //ADMIN
-    console.log("role", role);
+    // console.log("role", role);
     const { id } = req.user
     // console.log('id', id);
 
