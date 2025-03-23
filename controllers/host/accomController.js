@@ -33,6 +33,14 @@ exports.addAccom = TryCatch(async (req, res) => {
         typeOfAccom,
     } = accomInfrom;
 
+    const findThisHOSTID = await prisma.user.findUnique({
+        where: {
+            clerkID: req.user.id,
+            role: "HOST"
+        }
+    })
+    console.log('findThisHOSTID', findThisHOSTID);
+    findThisHOSTID === 0 && createError(404, "No have this host data yet!")
     // Step 1: Create accommodation
     const accommodation = await prisma.accommodation.create({
         data: {

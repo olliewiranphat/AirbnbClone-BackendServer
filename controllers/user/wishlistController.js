@@ -24,7 +24,6 @@ exports.createUnlistWishlist = TryCatch(async (req, res) => {
 
         res.status(200).json({ message: "create Wishlist already" })
 
-        res.send("Wishlist")
     }
 })
 

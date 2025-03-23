@@ -102,7 +102,7 @@ exports.getMyAccount = TryCatch(async (req, res) => {
         const createRole = await prisma.user.create({
             data: {
                 clerkID: id,
-                role
+                role: req.user.publicMetadata?.role || "CUSTOMER"
             }
         })
         res.status(200).json({ status: "SUCCESS", message: "Get My Account already!", results: createRole })
