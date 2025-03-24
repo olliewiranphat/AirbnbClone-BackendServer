@@ -89,7 +89,7 @@ exports.getAllAccommodations = TryCatch(async (req, res) => {
             }
         }
     })
-    console.log('allAccommodations', allAccommodations);
+    // console.log('allAccommodations', allAccommodations);
 
     res.status(200).json({ message: "SUCCESS, AllBookings!", results: allAccommodations })
 })

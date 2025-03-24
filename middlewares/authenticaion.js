@@ -4,7 +4,8 @@ const createError = require('../utils/createError');
 
 ///// Login?? -- getToken to verity by Clerk :
 module.exports = TryCatch(async (req, res, next) => {
-    // console.log('req.auth >>>', req.auth);s
+    console.log(req.headers.authorization)
+    console.log('req.auth >>>', req.auth);
     // const clerkID = req.auth.userId
     !req.auth.userId && createError(401, "Unauthorized!")
     ///// Have userId at Clerk:
