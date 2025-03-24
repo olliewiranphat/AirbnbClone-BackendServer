@@ -22,7 +22,7 @@ exports.updateCateName = TryCatch(async (req, res) => {
     console.log('req.body', req.body); //newCateName
 
     const newCateName = await prisma.accomCate.update({
-        where: { accomcateID: req.params.accomcateID },
+        where: { accomCateID: +req.params.accomCateID },
         data: {
             cateName: req.body.cateName
         }
@@ -35,7 +35,7 @@ exports.deleteAccomCate = TryCatch(async (req, res) => {
     console.log('req.params', req.params); //accomcateID
 
     await prisma.accomCate.delete({
-        where: { accomcateID: req.params.accomcateID }
+        where: { accomCateID: +req.params.accomCateID }
     })
     res.status(200).json({ message: "SUCCESS, Delete this AccomCate already!" })
 })
