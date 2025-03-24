@@ -5,7 +5,7 @@ exports.createNewAmenity = TryCatch(async (req, res) => {
     console.log('req.body', req.body);//{name: "Wi-Fi"}
 
     const results = await prisma.amenity.create({
-        data: { ...req.body }
+        data: { name:req.body.name }
     })
     console.log('results', results);
 

@@ -14,15 +14,15 @@ adminRouter.get('/all-bookings', authenticaion, authorAdmin, getAllBookings)
 adminRouter.get('/all-accommodations', getAllAccommodations)
 
 /// accomCateController.js 
-adminRouter.post('accomcate/create', authenticaion, authorAdmin, createAccomCate)
-adminRouter.get('accomcate/get-all', authenticaion, authorAdmin, getAllAccomCate)
-adminRouter.patch('accomcate/update-newname', authenticaion, authorAdmin, updateCateName)
-adminRouter.delete('accomcate/delete', authenticaion, authorAdmin, deleteAccomCate)
+adminRouter.post('/accomcate/create', authenticaion, authorAdmin, createAccomCate)
+adminRouter.get('/accomcate/get-all', authenticaion, authorAdmin, getAllAccomCate)
+adminRouter.patch('/accomcate/update-newname/:accomCateID', authenticaion, authorAdmin, updateCateName)
+adminRouter.delete('/accomcate/delete/:accomCateID', authenticaion, authorAdmin, deleteAccomCate)
 
 /// amenityController.js 
-adminRouter.post('amenity/create', authenticaion, authorAdmin, createNewAmenity)
-adminRouter.get('amenity/get-all', authenticaion, authorAdmin, getAllAmenities)
-adminRouter.patch('amenity/update-newname', authenticaion, authorAdmin, updateAmenity)
-adminRouter.delete('amenity/delete', authenticaion, authorAdmin, deleteAmenity)
+adminRouter.post('/amenity/create', authenticaion, authorAdmin, createNewAmenity)
+adminRouter.get('/amenity/get-all', authenticaion, authorAdmin, getAllAmenities)
+adminRouter.patch('/amenity/update-newname/:amenityID', authenticaion, authorAdmin, updateAmenity)
+adminRouter.delete('/amenity/delete/:amenityID', authenticaion, authorAdmin, deleteAmenity)
 
 module.exports = adminRouter
