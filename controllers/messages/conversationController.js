@@ -1,0 +1,61 @@
+const TryCatch = require("../../utils/TryCatch");
+const prisma = require('../../models');
+const createError = require("../../utils/createError");
+
+
+
+exports.getMyAllChats = TryCatch(async (req, res) => {
+    console.log('req.user.id', req.user.id);
+
+    /// FIND ALL CONVERSTION's this USER:
+    const myAllChats = await prisma.conversation.findMany({
+        where: {
+            OR: [
+                {
+                    participant1ID: req.user.id, //CASE: This user is participant1ID
+                },
+                {
+                    participant2ID: req.user.id  //CASE: This user is participant2ID
+                },
+
+            ]
+        },
+        include: { //GET USER DATA IN USER TABLE
+            participant1: true,
+            participant2: true
+        }
+    })
+    console.log('myAllChats', myAllChats);
+    if (myAllChats.length === 0) {
+        return res.status(200).json({ message: "SUCCESS, Get myAllConversations Data already!, NO HAVE DATA" })
+    }
+    // myAllChats.length > 0
+    res.status(200).json({ message: "SUCCESS, Get myAllConversations Data already!", results: myAllChats })
+})
+
+
+exports.getChatConversationID = TryCatch(async (req, res) => {
+    console.log('req.params', req.params); //conversationID
+
+
+    if (!req.params.conversationID) {
+        createError(400, "Please send all required data, Cannot create New Message!")
+    }
+
+    /// HAVE ALL REQUIRED DATA
+    const chatHistory = await prisma.conversation.findUnique({
+        where: {
+            conversationID: parseInt(req.params.conversationID)
+        },
+        include: {
+            Message: true
+        }
+    })
+
+    console.log('chatHistory', chatHistory); //SEND TO FRONTED
+    if (!chatHistory) {
+        return res.status(200).json({ message: `NO HAVE DATA with conversationID ${req.params.conversationID}` })
+    }
+
+    res.status(200).json({ message: `SUCCESS, Get chatHistory with conversationID ${req.params.conversationID} already!`, results: chatHistory })
+})

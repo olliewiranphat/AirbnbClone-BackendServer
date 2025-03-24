@@ -139,6 +139,7 @@ const userData = [
 ];
 // console.log('userData', userData)
 const accommodations = [
+
   {
     hostID: "1",
     accomCateID: 1,
@@ -390,6 +391,223 @@ const amenityData = [
     name: "IRON"
   },
 
+    {
+        hostID: "1",
+        accomCateID: 1,
+        typeOfAccom: "PRIVATEROOM",
+        pricePerNight: 50.00,
+        availQTY: 5,
+        title: "Cozy Private Room in City Center",
+        description: "A comfortable private room in the heart of the city, close to major attractions.",
+        addressDetail: "123 Main Street, Apt 4B",
+        city: "New York",
+        country: "USA",
+        MaxGuests: 2,
+        NumBedrooms: 1,
+        NumBathrooms: 1,
+        latitude: 40.712776,
+        longitude: -74.005974,
+        createAt: new Date(),
+        updatedAt: new Date()
+    },
+    {
+        hostID: "2",
+        accomCateID: 2,
+        typeOfAccom: "ENTIREHOME",
+        pricePerNight: 120.00,
+        availQTY: 3,
+        title: "Modern Apartment with Ocean View",
+        description: "A stunning apartment with breathtaking ocean views and all modern amenities.",
+        addressDetail: "45 Seaside Avenue",
+        city: "Los Angeles",
+        country: "USA",
+        MaxGuests: 4,
+        NumBedrooms: 2,
+        NumBathrooms: 2,
+        latitude: 34.052235,
+        longitude: -118.243683,
+        createAt: new Date(),
+        updatedAt: new Date()
+    },
+    {
+        hostID: "3",
+        accomCateID: 3,
+        typeOfAccom: "SHAREDROOM",
+        pricePerNight: 25.00,
+        availQTY: 8,
+        title: "Budget Shared Room in Downtown",
+        description: "A shared room with bunk beds, perfect for budget travelers.",
+        addressDetail: "12 Budget Street, Hostel Room 5",
+        city: "Chicago",
+        country: "USA",
+        MaxGuests: 6,
+        NumBedrooms: 1,
+        NumBathrooms: 1,
+        latitude: 41.878113,
+        longitude: -87.629799,
+        createAt: new Date(),
+        updatedAt: new Date()
+    },
+    {
+        hostID: "4",
+        accomCateID: 4,
+        typeOfAccom: "ENTIREHOME",
+        pricePerNight: 200.00,
+        availQTY: 2,
+        title: "Luxury Villa with Private Pool",
+        description: "Experience luxury in this private villa with a pool and breathtaking views.",
+        addressDetail: "77 Palm Beach Road",
+        city: "Miami",
+        country: "USA",
+        MaxGuests: 6,
+        NumBedrooms: 3,
+        NumBathrooms: 3,
+        latitude: 25.761681,
+        longitude: -80.191788,
+        createAt: new Date(),
+        updatedAt: new Date()
+    },
+    {
+        hostID: "5",
+        accomCateID: 5,
+        typeOfAccom: "PRIVATEROOM",
+        pricePerNight: 75.00,
+        availQTY: 4,
+        title: "Spacious Room near Central Park",
+        description: "A large private room within walking distance of Central Park.",
+        addressDetail: "89 West Street",
+        city: "New York",
+        country: "USA",
+        MaxGuests: 3,
+        NumBedrooms: 1,
+        NumBathrooms: 1,
+        latitude: 40.785091,
+        longitude: -73.968285,
+        createAt: new Date(),
+        updatedAt: new Date()
+    },
+]
+
+const accomCategory = [
+    {
+        cateName: "Pool"
+    },
+    {
+        cateName: "Hot tube"
+    },
+    {
+        cateName: "Free Parking"
+    },
+    {
+        cateName: "EV Charging"
+    },
+    {
+        cateName: "Crib"
+    },
+    {
+        cateName: "King bed"
+    },
+    {
+        cateName: "Gym"
+    },
+    {
+        cateName: "BBQ grill"
+    },
+    {
+        cateName: "Breakfast"
+    },
+    {
+        cateName: "Indoor fireplace"
+    },
+    {
+        cateName: "Smoking allowed"
+    },
+]
+
+const bookingData = [
+    {
+        "bookingID": 1,
+        "checkInDate": "2025-04-01T14:00:00Z",
+        "checkOutDate": "2025-04-05T12:00:00Z",
+        "guestQTY": 2,
+        "totalPrice": 5000.00,
+        "bookingStatus": "PENDING",
+        "createAt": "2025-03-21T10:00:00Z",
+        "customerID": "1",
+        "accomodationID": 8,
+    },
+    {
+        "bookingID": 2,
+        "checkInDate": "2025-04-02T14:00:00Z",
+        "checkOutDate": "2025-04-06T12:00:00Z",
+        "guestQTY": 3,
+        "totalPrice": 7500.00,
+        "bookingStatus": "CONFIRMED",
+        "createAt": "2025-03-21T11:00:00Z",
+        "customerID": "2",
+        "accomodationID": 7,
+    },
+    {
+        "bookingID": 3,
+        "checkInDate": "2025-04-03T14:00:00Z",
+        "checkOutDate": "2025-04-07T12:00:00Z",
+        "guestQTY": 1,
+        "totalPrice": 3200.00,
+        "bookingStatus": "CANCELLED",
+        "createAt": "2025-03-21T12:00:00Z",
+        "customerID": "3",
+        "accomodationID": 6,
+    },
+    {
+        "bookingID": 4,
+        "checkInDate": "2025-04-04T14:00:00Z",
+        "checkOutDate": "2025-04-08T12:00:00Z",
+        "guestQTY": 4,
+        "totalPrice": 9600.00,
+        "bookingStatus": "PENDING",
+        "createAt": "2025-03-21T13:00:00Z",
+        "customerID": "4",
+        "accomodationID": 10,
+    },
+    {
+        "bookingID": 5,
+        "checkInDate": "2025-04-05T14:00:00Z",
+        "checkOutDate": "2025-04-09T12:00:00Z",
+        "guestQTY": 2,
+        "totalPrice": 5400.00,
+        "bookingStatus": "CONFIRMED",
+        "createAt": "2025-03-21T14:00:00Z",
+        "customerID": "5",
+        "accomodationID": 8,
+    },
+    {
+        "bookingID": 6,
+        "checkInDate": "2025-04-06T14:00:00Z",
+        "checkOutDate": "2025-04-10T12:00:00Z",
+        "guestQTY": 1,
+        "totalPrice": 2900.00,
+        "bookingStatus": "PENDING",
+        "createAt": "2025-03-21T15:00:00Z",
+        "customerID": "6",
+        "accomodationID": 7,
+    },
+    {
+        "bookingID": 7,
+        "checkInDate": "2025-04-07T14:00:00Z",
+        "checkOutDate": "2025-04-11T12:00:00Z",
+        "guestQTY": 2,
+        "totalPrice": 4800.00,
+        "bookingStatus": "CANCELLED",
+        "createAt": "2025-03-21T16:00:00Z",
+        "customerID": "7",
+        "accomodationID": 6,
+    }
+]
+
+
+// console.log(accommodations);
+
+
 ]
 
 const bookingData = [
@@ -464,6 +682,16 @@ async function seedDB() {
   await prisma.review.createMany({ data: reviews })
   await prisma.amenity.createMany({ data: amenityData })
 
+    // seed 1
+    // await prisma.user.createMany({ data: userData })
+    // await prisma.accomCate.createMany({ data: accomCategory })
+
+
+    //seed 2
+    // await prisma.accommodation.createMany({ data: accommodations })
+
+    //seed 3
+    await prisma.booking.createMany({ data: bookingData })
 }
 
 seedDB() // npx prisma db seed

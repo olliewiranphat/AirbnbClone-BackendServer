@@ -51,14 +51,15 @@ model User {
   userID      Int      @id @default(autoincrement())
   clerkID     String   @unique @db.VarChar(255)
   role        Role     @default(CUSTOMER)
-  fullName    String?   @db.VarChar(255)
+  fullName    String?  @db.VarChar(255)
   email       String?  @db.VarChar(255)
   phoneNumber String?  @db.VarChar(255)
   address     String?  @db.VarChar(255)
   imageUrl    String?  @db.VarChar(255)
   createAt    DateTime @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime @updatedAt @db.Timestamp(0)
-  status      Status   @default(ACTIVE)
+  updatedAt   DateTime @default(now()) @updatedAt @db.Timestamp(0) //ใช้ @updatedAt เพื่อให้ Prisma อัปเดตฟิลด์นี้อัตโนมัติทุกครั้งที่มีการแก้ไขข้อมูลของแถวนี้
+
+  status Status @default(ACTIVE)
 
   Booking       Booking[]
   Accommodation Accommodation[]

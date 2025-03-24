@@ -177,3 +177,24 @@ exports.updateImageUrl = TryCatch(async (req, res) => {
 });
 
 
+exports.getAccommodationDetail = TryCatch(async (req, res) => {
+    const { accommodationID } = req.params;
+
+    const accommodation = await prisma.accommodation.findUnique({
+        where: { accommodationID: parseInt(accommodationID) },
+        include: {
+            host: true,
+            accomCate: true,
+            WishList: true,
+            Booking: true,
+            Review: true,
+            Room: true,
+            AccomAmen: true,
+        },
+    });
+    if (!accommodation) {
+        return res.status(404).json({ message: "Accommodation not found" });
+    }
+
+    res.status(200).json(accommodation);
+})
