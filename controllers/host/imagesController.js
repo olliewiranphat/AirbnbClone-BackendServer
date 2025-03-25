@@ -15,7 +15,8 @@ exports.addImageCloud = TryCatch(async (req, res) => {
     console.log(ImageUpload);
         res.status(200).json({
             message: "SUCCESS, Add Images at Cloudinary!",
-            secure_url: ImageUpload.secure_url
+            secure_url: ImageUpload.secure_url,
+            public_id: ImageUpload.public_id
         });
     } catch (error) {
         res.status(500).json({ error: "Upload failed", details: error.message });

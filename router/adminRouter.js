@@ -15,7 +15,7 @@ adminRouter.get('/all-accommodations', getAllAccommodations)
 
 /// accomCateController.js 
 adminRouter.post('accomcate/create', authenticaion, authorAdmin, createAccomCate)
-adminRouter.get('accomcate/get-all', authenticaion, authorAdmin, getAllAccomCate)
+adminRouter.get('/accomcate/get-all',authenticaion,  getAllAccomCate)
 adminRouter.patch('accomcate/update-newname', authenticaion, authorAdmin, updateCateName)
 adminRouter.delete('accomcate/delete', authenticaion, authorAdmin, deleteAccomCate)
 
