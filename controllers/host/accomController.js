@@ -79,6 +79,7 @@ exports.addAccom = TryCatch(async (req, res) => {
         ImgsRoom: {
           create: roomData[i].img.map((imageUrl) => ({
             imageUrl: imageUrl.secure_url,
+            public_id: imageUrl.public_id,
           })),
         },
       },
@@ -364,3 +365,26 @@ exports.getAllMyAccom = TryCatch(async (req, res) => {
   !allMyAccom && createError(404, "No have data yet!");
   res.status(200).json({ message: "SUCCESS, allMyAccom", allMyAccom });
 });
+
+exports.getMyAccom = TryCatch(async (req, res) => {
+    // console.log('req.user', req.user);
+  
+    const allMyAccom = await prisma.accommodation.findMany({
+      where: { accommodationID: +req.params.accommodationID },
+      include: {
+        Room: {
+          include: {
+            ImgsRoom: true,
+          },
+        },
+        AccomAmen: {
+          include: {
+            amenity: true,
+          },
+        },
+      },
+    });
+    console.log("allMyAccom", allMyAccom);
+    !allMyAccom && createError(404, "No have data yet!");
+    res.status(200).json({ message: "SUCCESS, allMyAccom", allMyAccom });
+  });

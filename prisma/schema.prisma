@@ -195,6 +195,7 @@ model Room {
 model ImgsRoom {
   imgsRoomID Int    @id @default(autoincrement())
   imageUrl   String
+  public_id  String
 
   roomID Int
   room   Room @relation(fields: [roomID], references: [roomID], onDelete: Cascade)

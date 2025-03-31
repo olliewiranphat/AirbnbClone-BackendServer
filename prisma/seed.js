@@ -414,43 +414,53 @@ const roomData = [
 const imgsData = [
   {
     roomID: 1,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1678286771694-ed08e355dce8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1678286771694-ed08e355dce8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room1"
   },
   {
     roomID: 2,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1732740587951-43667e9f4c6c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1732740587951-43667e9f4c6c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room2"
   },
   {
     roomID: 3,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1681487709148-60044b9e3303?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDV8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1681487709148-60044b9e3303?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDV8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room3"
   },
   {
     roomID: 4,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1681842749919-306fdc5b65a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1681842749919-306fdc5b65a3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room4"
   },
   {
     roomID: 5,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room5"
   },
   {
     roomID: 6,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room6"
   },
   {
     roomID: 7,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room7"
   },
   {
     roomID: 8,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1678297269980-16f4be3a15a6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room8"
   },
   {
     roomID: 9,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1678286769433-ea9d91b7d610?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1678286769433-ea9d91b7d610?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room9"
   },
   {
     roomID: 10,
-    imageUrl: "https://plus.unsplash.com/premium_photo-1678297270137-649734c4f549?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTR8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww"
+    imageUrl: "https://plus.unsplash.com/premium_photo-1678297270137-649734c4f549?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTR8fGFjY29tbW9kYXRpb25zfGVufDB8fDB8fHww",
+    public_id: "stayzy/room10"
   },
 
 ]

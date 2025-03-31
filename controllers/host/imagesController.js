@@ -1,5 +1,6 @@
 const cloudinary = require('../../config/cloudinary')
 const TryCatch = require('../../utils/TryCatch')
+const prisma = require('../../models')
 
 
 exports.addImageCloud = TryCatch(async (req, res) => {
@@ -27,5 +28,26 @@ exports.delImageCloud = TryCatch(async (req, res) => {
     console.log('req.body', req.body); // public_id 
 
     await cloudinary.uploader.destroy(req.body.public_id)
+
+    await prisma.imgsRoom.delete({
+        where: {
+            imgsRoomID: req.body.imgsRoomID
+        }
+    })
+    res.status(200).json({ message: "SUCCESS, Add Images at Cloudinary!" })
+})
+
+exports.editImageCloud = TryCatch(async (req, res) => {
+    console.log('req.body', req.body); // public_id 
+
+    await prisma.room.update({
+        where: {
+            roomID: req.body.roomID
+        },
+        data: {
+            imageUrl: req.body.imageUrl,
+            public_id: req.body.public_id
+        }
+    })
     res.status(200).json({ message: "SUCCESS, Add Images at Cloudinary!" })
 })
