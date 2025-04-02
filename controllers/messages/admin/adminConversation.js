@@ -3,7 +3,7 @@ const createError = require("../../../utils/createError");
 const TryCatch = require("../../../utils/TryCatch");
 
 
-exports.createChatAdminRoom = TryCatch(async (req, res) => {
+exports.getChatWithAdmin = TryCatch(async (req, res) => {
     // SELECT ADMIN FOR USER:
     const adminData = await prisma.user.findFirst({
         where: {
@@ -31,7 +31,9 @@ exports.createChatAdminRoom = TryCatch(async (req, res) => {
             ]
         },
         include: {
-            Message: true //CHAT HISTORY
+            Message: true, //CHAT HISTORY
+            participant1: true,
+            participant2: true
         }
     })
 
@@ -40,13 +42,17 @@ exports.createChatAdminRoom = TryCatch(async (req, res) => {
             data: {
                 participant1ID: req.user.id,
                 participant2ID: adminData.clerkID
+            },
+            include: {
+                participant1: true,
+                participant2: true
             }
         })
     }
     console.log('conversation', conversation);
 
 
-    res.status(200).json({ message: "SUCCESS, Create Conversation USER-ADMIN already!", results: { adminData, conversationData: conversation } })
+    res.status(200).json({ message: "SUCCESS, Create Conversation USER-ADMIN already!", results: conversation })
 })
 
 

@@ -3,13 +3,15 @@ const userRouter = express.Router()
 const authenticaion = require('../middlewares/authenticaion')
 const upload = require('../config/multerImage')
 
-const { getMyAccount, inactiveAccount, createUpdateAccount, updateImageUrl, getAccommodationDetail} = require('../controllers/user/accountController')
+const { getMyAccount, inactiveAccount, createUpdateAccount, updateImageUrl, getAccommodationDetail } = require('../controllers/user/accountController')
 const { cancelBooking, createBooking, updateBooking, getBookingHistory, deleteBooking } = require('../controllers/user/bookingController')
 const { createPaymentSession, stripeWebhook } = require('../controllers/user/paymentController')
 const { createUnlistWishlist, getWishlistHistory } = require('../controllers/user/wishlistController')
 const { postReview } = require('../controllers/user/reviewController')
-const { createChatAdminRoom } = require('../controllers/messages/admin/adminConversation')
 const { getMyAllChats, getChatConversationID } = require('../controllers/messages/conversationController')
+const { sendCreateMessage, updateIsReadMessage } = require('../controllers/messages/messageController')
+const { getChatWithAdmin } = require('../controllers/messages/admin/adminConversation')
+const { postChatAI } = require('../aichat/aichatController')
 
 
 ///// ACCOUNT:
@@ -50,10 +52,14 @@ userRouter.post('/review/:accommodationID', authenticaion, postReview)
 ////// Message:
 userRouter.get('/messages/get-my/allchats', authenticaion, getMyAllChats)
 userRouter.get('/messages/chat-history/:conversationID', authenticaion, getChatConversationID)
+userRouter.post('/messages/send/:conversationID', sendCreateMessage) //user/messages/send/:conversationID, senderID: req.user.id
+userRouter.patch('/messages/isread/:messageID', authenticaion, updateIsReadMessage) //user/messages/send/:conversationID, senderID: req.user.id
+
 // /// CHAT WITH ADMIN:
+userRouter.get('/messages/chat-with-admin', authenticaion, getChatWithAdmin)
+
 //Step1 : Select CHATWITHADMIN (Support) --> Create CONVERSATION ID + participant USER-ADMIN
-// userRouter.get('/messages/chat-with-admin/:conversationID', authenticaion, getChatHistory)
-userRouter.get('/messages/chat-with-admin/', authenticaion, createChatAdminRoom) //Find AdminID, Create Conversation-Message
+// userRouter.get('/messages/chat-with-admin/', authenticaion, createChatAdminRoom) //Find AdminID, Create Conversation-Message
 // userRouter.post('/messages/conversation/with-admin/create-new-messsage/:conversationID/:participant2ID', createNewMessageAdmin) //where conversationID
 
 // /// INBOX LISTS : CHAT ROOM HISTORY (ALL)
@@ -62,6 +68,6 @@ userRouter.get('/messages/chat-with-admin/', authenticaion, createChatAdminRoom)
 // // //Step2: Get CHAT-HISTORY where participantID
 // // userRouter.get('/messages/get-history/:conversationID', getMessageHistory) //where conversationID
 
-
+userRouter.post('/chat/ai', postChatAI)
 
 module.exports = userRouter

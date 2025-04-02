@@ -66,10 +66,10 @@ model User {
   WishList      WishList[]
   Review        Review[]
 
-  Conversation1   Conversation[] @relation("ConversationParticipant1")
-  Conversation2   Conversation[] @relation("ConversationParticipant2")
-  SenderMessage   Message[]      @relation("SenderMessage")
-  ReceiverMessage Message[]      @relation("ReceiverMessage")
+  Conversation1 Conversation[] @relation("ConversationParticipant1")
+  Conversation2 Conversation[] @relation("ConversationParticipant2")
+  SenderMessage Message[]      @relation("SenderMessage")
+  Message       Message[]      @relation("ReceiverMessage")
 }
 
 model Accommodation {
@@ -161,9 +161,8 @@ model Message {
   sentAt    DateTime @default(now()) @db.Timestamp(0)
   isRead    Boolean  @default(false) //Read STATUS
 
-  senderID String
-  sender   User   @relation("SenderMessage", fields: [senderID], references: [clerkID], onDelete: Cascade)
-
+  senderID   String
+  sender     User   @relation("SenderMessage", fields: [senderID], references: [clerkID], onDelete: Cascade)
   receiverID String
   receiver   User   @relation("ReceiverMessage", fields: [receiverID], references: [clerkID], onDelete: Cascade)
 
